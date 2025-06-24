@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Techfont_Italica';
+    src: url("../assets/fonts/Techfont_Italica.ttf") format("truetype");
+}
+
+.header {
+    position: absolute;
+    top: -1.5rem;
+    left: 0;
+    z-index: 10;
+}
+
+.logo {
+    height: 9rem;
+    width: 9rem;
+}
+
+.content {
+    min-height: 100vh; /* растягиваем на всю высоту экрана */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* ставим контент вверх */
+}
+
+.description {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 2rem;
+}
+
+.description h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 400;
+    font-family: 'Techfont_Italica', serif;
+    margin-bottom: 1rem;
+    max-width: 988px;
+}
+
+.description p {
+    font-family: 'SF UI Text', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    max-width: 577px;
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+.description button {
+    max-width: 243px;
+    height: 62px;
+    font-size: 24px;
+    font-family: 'Tauri', sans-serif;
+    font-weight: 400;
+    background-color: #FFA143;
+    color: #000000;
+    border-radius: 13px;
+    border: none;
+    padding: 0 1.2em;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.description button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-20deg);
+    transition: left 0.4s ease;
+}
+
+.description button:hover::before {
+    left: 100%;
+}
+
+.description button:hover {
+    background: linear-gradient(135deg, #ff9933, #ff6600);
+    box-shadow: 0 6px 18px rgba(255, 123, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.description button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(255, 123, 0, 0.4);
+}
+
+.description button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 161, 67, 0.4);
+}
