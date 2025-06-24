@@ -1,22 +1,21 @@
 import {useNavigate} from "react-router-dom";
-import './Chat.css'
+import Card from "../Card/Card.jsx";
+import {CARDS} from "../Card/cards.js";
+import './Test.css';
 
-function Chat() {
+function Test() {
 
     const navigate = useNavigate();
 
     return (
         <>
-            <h1>Chat</h1>
+            <h1>Тест</h1>
             <button onClick={() => navigate("/")}>
                 Назад
-            </button>
-            <button onClick={() => navigate("/test")}>
-                Тест
             </button>
         </>
 
     );
 }
 
-export default Chat;
+export default Test;

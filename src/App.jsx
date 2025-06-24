@@ -1,8 +1,8 @@
 import './App.css'
-import Logo from './assets/img/logo.svg'
 import {Route, Routes} from "react-router-dom";
 import Home from './pages/Home.jsx';
 import Chat from './pages/Chat.jsx';
+import Test from "./pages/Test.jsx";
 
 function App() {
 
@@ -12,6 +12,7 @@ function App() {
         <Routes>
             <Route path={'/'} element={<Home />} />
             <Route path={'chat'} element={<Chat />} />
+            <Route path={'test'} element={<Test />} />
         </Routes>
     </>
   );

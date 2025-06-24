@@ -1,6 +1,26 @@
 @font-face {
     font-family: 'Techfont_Italica';
-    src: url("../assets/fonts/Techfont_Italica.ttf") format("truetype");
+    src: url("../assets/fonts/Techfont Italica.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'SF UI Text 600';
+    src: url("../assets/fonts/SFUIText-Semibold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'SF UI Text 500';
+    src: url("../assets/fonts/SFUIText-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'SF UI Text 400';
+    src: url("../assets/fonts/SFUIText-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Tauri';
+    src: url("../assets/fonts/Tauri-Regular.ttf") format("truetype");
 }
 
 .header {
@@ -20,40 +40,39 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* ставим контент вверх */
+
 }
 
 .description {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    text-align: center;
     padding: 2rem;
 }
 
 .description h1 {
-    font-size: 3rem;
+    font-size: 65px;
     color: white;
-    font-weight: 400;
     font-family: 'Techfont_Italica', serif;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
     max-width: 988px;
 }
 
 .description p {
-    font-family: 'SF UI Text', sans-serif;
+    font-family: 'SF UI Text 400', serif;
     font-size: 1.5rem;
-    font-weight: 400;
-    max-width: 577px;
     text-align: left;
     margin-bottom: 3rem;
+    max-width: 577px;
 }
 
 .description button {
+    margin: 0;
     max-width: 243px;
     height: 62px;
     font-size: 24px;
-    font-family: 'Tauri', sans-serif;
+    font-family: 'Tauri', serif;
     font-weight: 400;
     background-color: #FFA143;
     color: #000000;
@@ -66,6 +85,8 @@
     position: relative;
     overflow: hidden;
 }
+
+/*Анимация для кнопки*/
 
 .description button::before {
     content: "";
@@ -98,3 +119,73 @@
     outline: none;
     box-shadow: 0 0 0 4px rgba(255, 161, 67, 0.4);
 }
+
+.cards-container {
+    padding: 0.5rem;
+    text-align: center;
+    max-width: 888px;
+    margin: 0 auto;
+}
+
+.cards-container h2 {
+    padding: 0;
+    font-family: "SF UI Text 600", serif;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0 0 49px 0;
+}
+
+/* сетка 2х2 из карточек */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
