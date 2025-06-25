@@ -1,7 +1,7 @@
-import Icon1 from '../assets/img/icon1.svg'
-import Icon2 from '../assets/img/icon2.svg'
-import Icon3 from '../assets/img/icon3.svg'
-import Icon4 from '../assets/img/icon4.svg'
+import Icon1 from '../../assets/img/icon1.svg'
+import Icon2 from '../../assets/img/icon2.svg'
+import Icon3 from '../../assets/img/icon3.svg'
+import Icon4 from '../../assets/img/icon4.svg'
 
 export const CARDS = [
     {

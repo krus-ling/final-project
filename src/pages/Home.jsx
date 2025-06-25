@@ -1,8 +1,8 @@
-import Logo from "../assets/img/logo.svg";
 import './Home.css';
 import {useNavigate} from "react-router-dom";
-import {CARDS} from "../Card/cards.js";
-import Card from "../Card/Card.jsx";
+import {CARDS} from "../components/Card/cards.js";
+import Card from "../components/Card/Card.jsx";
+import LoadingField from "../components/LoadingField/LoadingField.jsx";
 
 function Home() {
 
@@ -10,9 +10,7 @@ function Home() {
 
     return (
         <>
-            <div className={'header'}>
-                <img src={Logo} alt={'CodePulse'} className={'logo'} />
-            </div>
+
 
             <div className={'content'}>
 
@@ -36,6 +34,11 @@ function Home() {
                             />
                         ))}
                     </div>
+                </div>
+
+                <div className={'input-field'}>
+                    <h2>Загрузите свой код</h2>
+                    <LoadingField onFileSelected={(files) => console.log(files)} />
                 </div>
 
             </div>

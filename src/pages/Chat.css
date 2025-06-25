@@ -1,3 +1,14 @@
 button {
     margin-left: 0.5rem;
 }
+
+.chat {
+    display: flex;
+    border-radius: 40px;
+    background-color: #1f1f1f;
+    width: 888px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}

@@ -1,0 +1,128 @@
+.dropzone-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    color: white;
+    margin: 0 auto;
+    /*border: 1px solid #c81e1e;*/
+    max-width: 960px;
+}
+
+.dropzone {
+    border: 4px dashed #666;
+    border-radius: 13px;
+
+
+    text-align: center;
+    background-color: #1f1f1f;
+    cursor: pointer;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Состояние активного дропа */
+.dropzone.drag-active {
+    border-color: rgba(43, 35, 20, 0.67);
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(255, 161, 67, 1);
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Спиннер */
+.spinner {
+    margin: 0 auto 26px auto;
+    border: 4px solid #A7A7A7;
+    border-top: 4px solid rgba(255, 161, 67, 1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+.upload-control {
+    height: 62px; /* фиксируем высоту как у кнопки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* расстояние между спиннером/кнопкой и текстом */
+    flex-wrap: wrap;
+}
+
+.files-count-text {
+    color: #FFA143;
+    font-family: "SF UI Text 500", serif;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.upload-icon {
+    height: 100px;
+    margin-bottom: 19px;
+    margin-top: 35px;
+}
+
+.drop-text {
+    margin: 0 0 42px 0;
+    padding: 0;
+    font-size: 32px;
+    font-family: "SF UI Text 600", serif;
+}
+
+.upload-button {
+    background-color: #333;
+    color: white;
+    font-family: "SF UI Text 400", serif;
+    font-size: 24px;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin: 0;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    max-width: 337px;
+    width: 100%;
+}
+
+.upload-button:hover {
+    background-color: #444;
+}
+
+.supported-text {
+    font-size: 20px;
+    margin: 30px 0 56px 0;
+    color: #A7A7A7;
+    font-family: "SF UI Text 400", serif;
+}
+
+.local-note {
+    font-size: 24px;
+    margin-top: 49px;
+    color: #FFFFFF;
+    font-family: "SF UI Text 500", serif;
+}
+
+.dropzone-padding {
+    padding: 37px;
+    background-color: #1f1f1f;
+    border-radius: 13px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-control {
+    height: 62px; /* фиксируем высоту, как у кнопки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+

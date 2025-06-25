@@ -4,3 +4,40 @@
   padding: 2rem;
   text-align: center;
 }
+
+.header {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  z-index: 10;
+}
+
+.logo {
+  height: 9rem;
+  width: 9rem;
+}
+
+@font-face {
+  font-family: 'Techfont_Italica';
+  src: url("./assets/fonts/Techfont Italica.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'SF UI Text 600';
+  src: url("./assets/fonts/SFUIText-Semibold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'SF UI Text 500';
+  src: url("./assets/fonts/SFUIText-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'SF UI Text 400';
+  src: url("./assets/fonts/SFUIText-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Tauri';
+  src: url("./assets/fonts/Tauri-Regular.ttf") format("truetype");
+}

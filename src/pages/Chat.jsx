@@ -14,6 +14,9 @@ function Chat() {
             <button onClick={() => navigate("/test")}>
                 Тест
             </button>
+            <div className={'chat'}>
+                Dialog
+            </div>
         </>
 
     );

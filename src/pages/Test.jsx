@@ -1,7 +1,8 @@
 import {useNavigate} from "react-router-dom";
-import Card from "../Card/Card.jsx";
-import {CARDS} from "../Card/cards.js";
+import Card from "../components/Card/Card.jsx";
+import {CARDS} from "../components/Card/cards.js";
 import './Test.css';
+import Input from "../components/LoadingField/LoadingField.jsx";
 
 function Test() {
 
@@ -10,9 +11,10 @@ function Test() {
     return (
         <>
             <h1>Тест</h1>
-            <button onClick={() => navigate("/")}>
+            <button onClick={() => navigate("/chat")}>
                 Назад
             </button>
+            <Input />
         </>
 
     );
