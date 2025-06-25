@@ -2,7 +2,7 @@ import './ChatBox.css';
 import { useRef, useState } from "react";
 import ChatToolbar from '../ChatToolbar/ChatToolbar.jsx';
 
-const ChatBox = ({ onFileSelected }) => {
+const ChatBox = ({ onFileSelected, onSend }) => {
     const fileInputRef = useRef(null);
     const dragCounter = useRef(0);
 
@@ -64,7 +64,10 @@ const ChatBox = ({ onFileSelected }) => {
     };
 
     const handleSend = () => {
-        console.log('Отправка файлов...');
+        if (onSend) {
+            onSend();
+        }
+
     };
 
     // Имитация загрузки
@@ -94,12 +97,7 @@ const ChatBox = ({ onFileSelected }) => {
             <div className="chat-input">
                 {/* Всегда видимая фраза */}
                 <span className="chat-hint">
-                    <span className="chat-hint-title">CodePulse</span> готов к действию.
-                    {!isLoading && (
-                        <>
-                            {filesCount > 0 ? ` Файлов загружено: ${filesCount}` : ' Добавь свой файл.'}
-                        </>
-                    )}
+                    <span className="chat-hint-title">CodePulse</span> готов к действию.  Добавь свой файл.
                 </span>
 
                 <ChatToolbar
