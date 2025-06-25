@@ -19,7 +19,7 @@ export const CARDS = [
     {
         id: 3,
         icon: Icon3,
-        title: 'AI – рефакторинг',
+        title: 'AI-рефакторинг',
         description: 'Переименование, разбиение, оптимизация'
     },
     {

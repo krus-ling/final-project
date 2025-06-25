@@ -1,14 +1,22 @@
-button {
-    margin-left: 0.5rem;
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: 1440px;
+    border: 1px solid #3ec193;
+    width: 100%;
 }
 
-.chat {
+.page-wrapper {
+    min-height: 200vh; /* просто чтобы увидеть эффект скролла */
     display: flex;
-    border-radius: 40px;
-    background-color: #1f1f1f;
-    width: 888px;
-    height: 150px;
-    justify-content: center;
     align-items: center;
-    margin-top: 5rem;
+    justify-content: center;
+}
+
+.content h1 {
+    font-family: "SF UI Text 600", serif;
+    font-size: 40px;
+    padding: 0;
+    margin: 0 0 59px 0;
 }

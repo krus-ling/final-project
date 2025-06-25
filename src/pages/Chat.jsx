@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import './Chat.css'
+import ChatBox from "../components/ChatBox/ChatBox.jsx";
+
 
 function Chat() {
 
@@ -7,16 +9,22 @@ function Chat() {
 
     return (
         <>
-            <h1>Chat</h1>
-            <button onClick={() => navigate("/")}>
-                Назад
-            </button>
-            <button onClick={() => navigate("/test")}>
-                Тест
-            </button>
-            <div className={'chat'}>
-                Dialog
+
+
+
+            <div className={'page-wrapper'}>
+                <div className={'content'}>
+                    <button onClick={() => navigate("/")}>
+                        <h1>Chat</h1>
+                        Назад
+                    </button>
+
+                    <h1>Готов к анализу — загрузи свой код!</h1>
+
+                    <ChatBox />
+                </div>
             </div>
+
         </>
 
     );

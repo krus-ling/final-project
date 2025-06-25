@@ -1,0 +1,61 @@
+.chat-footer {
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 1440px;
+}
+
+.chat-icons {
+    margin-left: 40px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+.chat-send-button {
+    width: 50px;
+    height: 50px;
+    background-color: #464544;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Убираем внутренние отступы, они мешают */
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+
+/* При наведении, если кнопка активна */
+.chat-send-button.active:hover {
+    background-color: #FFA143;
+    transform: translateY(-2px);
+}
+
+/* При клике — эффект нажатия */
+.chat-send-button.active:active {
+    background-color: #e68d30;
+    transform: scale(0.97);
+}
+
+/* При неактивном состоянии */
+.chat-send-button.disabled {
+    background-color: #2f2f2f;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Сама иконка */
+.chat-send-button img {
+    height: 28px;
+    transition: filter 0.2s ease;
+}
+
+/* Серый фильтр для иконки, если кнопка неактивна */
+.chat-send-button.disabled img {
+    filter: grayscale(100%) brightness(0.7);
+}
+
+

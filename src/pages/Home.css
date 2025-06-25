@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: flex-start; /* ставим контент вверх */
     max-width: 1440px;
+    /*border: 1px solid red;*/
 }
 
 .description {
