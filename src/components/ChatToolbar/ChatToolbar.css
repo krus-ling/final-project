@@ -23,8 +23,7 @@
     align-items: center;
     justify-content: center;
     padding: 0; /* Убираем внутренние отступы, они мешают */
-    margin-right: 30px;
-    margin-top: 10px;
+
 }
 
 
@@ -47,6 +46,22 @@
     cursor: not-allowed;
 }
 
+/* Скрытая по умолчанию кнопка — невидима, но занимает место */
+.chat-send-button.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Появление */
+.chat-send-button.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 /* Сама иконка */
 .chat-send-button img {
     height: 28px;
@@ -56,6 +71,35 @@
 /* Серый фильтр для иконки, если кнопка неактивна */
 .chat-send-button.disabled img {
     filter: grayscale(100%) brightness(0.7);
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #FFA143;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-sizing: border-box;
+
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.send-button-wrapper {
+    width: 50px;       /* совпадает с шириной кнопки */
+    height: 50px;      /* совпадает с высотой кнопки */
+    margin-right: 30px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Чтобы место занималось всегда, вне зависимости от содержимого */
+    position: relative;
 }
 
 

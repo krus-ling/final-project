@@ -1,11 +1,9 @@
 .chat-box {
-    display: flex;
-    flex-direction: column;
     background-color: #1f1f1f;
     border-radius: 40px;
     /*border: 1px solid #3ec193;*/
     width: 100%;
-    max-width: 1440px;
+    max-width: 1057px;
 }
 
 .chat-input {
@@ -22,6 +20,8 @@
     font-size: 24px;
     margin-bottom: 41px;
     margin-top: 30px;
+    min-height: 28px; /* чтобы не прыгала при смене текста */
+    transition: all 0.3s ease;
 }
 
 .chat-hint-title {

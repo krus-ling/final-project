@@ -7,8 +7,33 @@ import SecurityIcon from '../../assets/img/icon4.svg';
 import SendIcon from '../../assets/img/send-icon.svg';
 
 import ChatOptionIcon from "../ChatOptionIcon/ChatOptionIcon.jsx";
+import {useState} from "react";
 
-const ChatToolbar = ( {activeIcon, onIconClick, isSendActive, onSend, onUpload} ) => {
+const ChatToolbar = ( { isSendActive, onSend, onUpload, isLoading } ) => {
+
+    const [activeIcons, setActiveIcons] = useState([]);
+    const [isPlusActive, setIsPlusActive] = useState(false);
+
+    const handleIconClick = (name) => {
+        if (name === 'plus') {
+            setIsPlusActive(true); // временно активируем
+            onUpload(); // вызываем загрузку (окно выбора)
+
+            // через 300 мс убираем выделение
+            setTimeout(() => {
+                setIsPlusActive(false);
+            }, 200);
+
+            return; // не активируем иконку "плюс"
+        }
+
+        setActiveIcons((prev) =>
+            prev.includes(name)
+                ? prev.filter((n) => n !== name) // убираем из активных
+                : [...prev, name] // добавляем в активные
+        );
+    };
+
     return (
         <div className={'chat-footer'}>
             <div className={'chat-icons'}>
@@ -17,51 +42,55 @@ const ChatToolbar = ( {activeIcon, onIconClick, isSendActive, onSend, onUpload} 
                     icon={PlusIcon}
                     name={'plus'}
                     title={'Загрузить файл'}
-                    active={activeIcon === 'plus'}
-                    onClick={(name) => {
-                        onIconClick(name);
-                        onUpload();
-                    }}
+                    active={isPlusActive}
+                    onClick={handleIconClick}
                 />
                 <ChatOptionIcon
                     icon={CompareIcon}
                     name={'compare'}
                     title={'Умное сравнение'}
-                    active={activeIcon === 'compare'}
-                    onClick={onIconClick}
+                    active={activeIcons.includes('compare')}
+                    onClick={handleIconClick}
                 />
                 <ChatOptionIcon
                     icon={CriticismIcon}
                     name={'criticism'}
                     title={'Критика архитектуры'}
-                    active={activeIcon === 'criticism'}
-                    onClick={onIconClick}
+                    active={activeIcons.includes('criticism')}
+                    onClick={handleIconClick}
                 />
                 <ChatOptionIcon
                     icon={RefactoringIcon}
                     name={'refactoring'}
                     title={'ИИ-рефакторинг'}
-                    active={activeIcon === 'refactoring'}
-                    onClick={onIconClick}
+                    active={activeIcons.includes('refactoring')}
+                    onClick={handleIconClick}
                 />
                 <ChatOptionIcon
                     icon={SecurityIcon}
                     name={'security'}
                     title={'Анализ безопасности'}
-                    active={activeIcon === 'security'}
-                    onClick={onIconClick}
+                    active={activeIcons.includes('security')}
+                    onClick={handleIconClick}
                 />
 
             </div>
 
-            <button
-                className={`chat-send-button ${isSendActive ? 'active' : 'disabled'}`}
-                disabled={!isSendActive}
-                onClick={onSend}
-                title={'Отправить'}
-            >
-                <img src={SendIcon} alt="Отправить" />
-            </button>
+            <div className="send-button-wrapper">
+                {isLoading ? (
+                    <div className="spinner"></div>
+                ) : (
+                    <button
+                        className={`chat-send-button ${isSendActive ? 'active visible' : 'disabled hidden'}`}
+                        disabled={!isSendActive}
+                        onClick={onSend}
+                        title={'Отправить'}
+                    >
+                        <img src={SendIcon} alt="Отправить" />
+                    </button>
+                )}
+            </div>
+
         </div>
     );
 };

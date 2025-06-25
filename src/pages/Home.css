@@ -19,12 +19,12 @@
     font-size: 70px;
     color: white;
     font-family: 'Techfont_Italica', serif;
-    margin-bottom: 0.5rem;
-    text-align: center;
+    text-align: left;
 
 }
 
 .description p {
+    margin-top: 0;
     font-family: 'SF UI Text 400', serif;
     font-size: 1.5rem;
     text-align: left;

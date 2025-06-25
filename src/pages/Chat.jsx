@@ -1,27 +1,21 @@
-import {useNavigate} from "react-router-dom";
 import './Chat.css'
 import ChatBox from "../components/ChatBox/ChatBox.jsx";
+import LoadingField from "../components/LoadingField/LoadingField.jsx";
 
 
 function Chat() {
 
-    const navigate = useNavigate();
-
     return (
         <>
 
-
-
             <div className={'page-wrapper'}>
-                <div className={'content'}>
-                    <button onClick={() => navigate("/")}>
-                        <h1>Chat</h1>
-                        Назад
-                    </button>
+                <div className={'chat-content'}>
+                    <div className={'message'}>
+                        <h1>Готов к анализу — загрузи свой код!</h1>
+                        <p></p>
+                    </div>
 
-                    <h1>Готов к анализу — загрузи свой код!</h1>
-
-                    <ChatBox />
+                    <ChatBox onFileSelected={(files) => console.log(files)} />
                 </div>
             </div>
 

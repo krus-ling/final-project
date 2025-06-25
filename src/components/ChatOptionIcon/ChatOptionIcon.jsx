@@ -10,7 +10,7 @@ const ChatOptionIcon = ( {icon, name, active, onClick, title} ) => {
             <img
                 src={icon}
                 alt={title}
-                className={'chat-icon'}
+                className={`chat-icon ${active ? 'active' : ''}`}
             />
         </button>
     );
