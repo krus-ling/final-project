@@ -35,7 +35,7 @@ const ChatBox = ({
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
-            simulateUpload(files);
+            simulateUpload([files[0]]);
         }
     };
 
@@ -47,7 +47,7 @@ const ChatBox = ({
 
         const files = Array.from(e.dataTransfer.files);
         if (files.length > 0) {
-            simulateUpload(files);
+            simulateUpload([files[0]]);
         }
     };
 
@@ -82,10 +82,11 @@ const ChatBox = ({
     const simulateUpload = (files) => {
         setIsLoading(true);
         setIsSendActive(false);
-        setUploadedFiles(prevFiles => [...prevFiles, ...files]);
+        const singleFile = files[0];
+        setUploadedFiles([singleFile]);
 
         if (onFileSelected) {
-            onFileSelected(files); // передаём наверх
+            onFileSelected([singleFile]); // передаём наверх
         }
 
         setTimeout(() => {
@@ -132,7 +133,6 @@ const ChatBox = ({
                     type="file"
                     ref={fileInputRef}
                     style={{ display: 'none' }}
-                    multiple
                     onChange={handleFileChange}
                     accept=".py,.js,.ts,.java,.cpp,.go,.zip"
                 />

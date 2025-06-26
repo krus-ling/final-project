@@ -14,7 +14,7 @@ const LoadingField = ({ onFileSelected }) => {
 
     const [isDragActive, setIsDragActive] = useState(false);
 
-    const [filesCount, setFilesCount] = useState(0); // добавляем состояние для кол-ва файлов
+    const [fileName, setFileName] = useState(null); // добавляем состояние для кол-ва файлов
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -23,9 +23,10 @@ const LoadingField = ({ onFileSelected }) => {
 
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            setFilesCount(prev => prev + files.length);
+            const file = files[0];
+            setFileName(file.name);
             setIsLoading(true); // спиннер появляется только тут
-            onFileSelected(files);
+            onFileSelected([file]);
             setTimeout(() => setIsLoading(false), 1500) // ЗАГЛУШКА ДЛЯ ЗАГРУЗКИ
         }
     };
@@ -37,11 +38,12 @@ const LoadingField = ({ onFileSelected }) => {
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
-            setFilesCount(prev => prev + files.length);
+            const file = files[0];
+            setFileName(file.name);
             setIsLoading(true);
             dragCounter.current = 0;  // сброс счетчика при выборе через диалог
             setIsDragActive(false);
-            onFileSelected(files);
+            onFileSelected([file]);
             setTimeout(() => setIsLoading(false), 1500) // ЗАГЛУШКА ДЛЯ ЗАГРУЗКИ
         }
     };
@@ -91,10 +93,10 @@ const LoadingField = ({ onFileSelected }) => {
 
                     {/* Подпись под кнопкой */}
                     {isLoading ? (
-                        <p className="files-count-text">Файлы загружаются, подождите...</p>
+                        <p className="files-count-text">Файл загружается, подождите...</p>
                     ) : (
-                        filesCount > 0 && (
-                            <p className="files-count-text">Файлов загружено: {filesCount}</p>
+                        fileName && (
+                            <p className="files-count-text">Файл/архив загружен: {fileName}</p>
                         )
                     )}
 
@@ -102,7 +104,6 @@ const LoadingField = ({ onFileSelected }) => {
                         type="file"
                         ref={inputRef}
                         style={{ display: 'none' }}
-                        multiple
                         onChange={handleFileChange}
                         accept=".py,.js,.ts,.java,.cpp,.go,.zip"
                     />

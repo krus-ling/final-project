@@ -28,7 +28,7 @@ function Chat() {
 
         setIsSent(false);      // Заглушка ещё не должна быть видна
         setIsAnalyzing(true);  // Сначала показываем только "Анализ..."
-        console.log("Файлы отправлены:", files);
+        console.log("Файл/архив отправлен:", files);
 
         // через 3 секунды: скрыть "Анализ", показать заглушку
         setTimeout(() => {
@@ -39,7 +39,7 @@ function Chat() {
     };
 
     const handleFileSelected = (files) => {
-        setFiles(prevFiles => [...prevFiles, ...files]);
+        setFiles(files);
         setIsSent(false);          // сбрасываем заглушку
         setIsAnalyzing(false);     // подстраховка
         setDotCount(0);            // сброс точек
