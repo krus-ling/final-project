@@ -11,6 +11,9 @@ const ChatBox = ({
                      initialFiles = [],
                      isSent
 }) => {
+
+    const [hasBeenSent, setHasBeenSent] = useState(false);
+
     const fileInputRef = useRef(null);
     const dragCounter = useRef(0);
 
@@ -41,6 +44,12 @@ const ChatBox = ({
 
     // DnD handlers
     const handleDrop = (e) => {
+
+        if (onSend && !hasBeenSent) { // проверяем, что файл ещё не был отправлен
+            setHasBeenSent(true); // помечаем, что файл был отправлен
+            onSend();
+        }
+
         e.preventDefault();
         dragCounter.current = 0;
         setIsDragActive(false);
@@ -72,16 +81,21 @@ const ChatBox = ({
     };
 
     const handleSend = () => {
-        if (onSend) {
+        if (onSend && !hasBeenSent) {
+            // Сразу делаем кнопку неактивной
+            setIsSendActive(false);
+            setHasBeenSent(true);
+            // Затем выполняем отправку
             onSend();
         }
-
     };
+
 
     // Имитация загрузки
     const simulateUpload = (files) => {
         setIsLoading(true);
         setIsSendActive(false);
+        setHasBeenSent(false); // сбрасываем флаг при загрузке нового файла
         const singleFile = files[0];
         setUploadedFiles([singleFile]);
 
@@ -110,6 +124,7 @@ const ChatBox = ({
         if (isSent) {
             setUploadedFiles([]);
             setIsSendActive(false);
+            setHasBeenSent(true); // устанавливаем флаг отправки
         }
     }, [isSent]);
 
@@ -146,7 +161,7 @@ const ChatBox = ({
                 <ChatToolbar
                     activeIcon={activeIcon}
                     onIconClick={toggleActiveIcon}
-                    isSendActive={!isSent && isSendActive && uploadedFiles.length > 0}
+                    isSendActive={!isSent && isSendActive && uploadedFiles.length > 0 && !hasBeenSent}
                     onSend={handleSend}
                     onUpload={handleUploadClick}
                     isLoading={isLoading}

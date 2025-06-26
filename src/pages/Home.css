@@ -38,7 +38,7 @@
     max-width: 577px;
 }
 
-.description button {
+.home-main-button {
     margin: 0;
     max-width: 243px;
     height: 62px;
@@ -55,41 +55,54 @@
     box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
-/*Анимация для кнопки*/
-
-.description button::before {
+.home-main-button::after {
     content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
     background: rgba(255, 255, 255, 0.2);
-    transform: skewX(-20deg);
-    transition: left 0.4s ease;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
 }
 
-.description button:hover::before {
-    left: 100%;
+/* При наведении — запускаем анимацию */
+.description .home-main-button:hover::after {
+    transform: skewX(-45deg) scaleX(1);
 }
 
-.description button:hover {
-    background: linear-gradient(135deg, #ff9933, #ff6600);
+/* Наведение — затемнение и эффект */
+.description .home-main-button:hover {
+
     box-shadow: 0 6px 18px rgba(255, 123, 0, 0.5);
     transform: translateY(-2px);
+    color: black;
+    z-index: 1;
 }
 
-.description button:active {
+/* Клик по кнопке */
+.description .home-main-button:active {
     transform: scale(0.98);
     box-shadow: 0 2px 6px rgba(255, 123, 0, 0.4);
 }
 
-.description button:focus {
+/* Фокус */
+.description .home-main-button:focus {
     outline: none;
     box-shadow: 0 0 0 4px rgba(255, 161, 67, 0.4);
 }
+
+/* Текст над подсветкой */
+.description .home-main-button span {
+    position: relative;
+    z-index: 1;
+}
+
 
 .cards-container {
     padding: 0.5rem;

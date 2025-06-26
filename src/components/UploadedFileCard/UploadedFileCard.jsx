@@ -1,5 +1,4 @@
 import './UploadedFileCard.css';
-import { X } from 'lucide-react'; // или можно просто использовать обычный svg
 
 const UploadedFileCard = ({ file, onRemove }) => {
     const fileSizeKB = (file.size / 1024).toFixed(0);

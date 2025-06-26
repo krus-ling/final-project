@@ -41,8 +41,8 @@ const Home = () => {
             <div className={'description'}>
                 <h1>AI - анализ и рефакторинг кода</h1>
                 <p>загрузите свой код и получите анализ,<br/>улучшения и рекомендации - прямо в браузере</p>
-                <button onClick={handleStartAnalysis}>
-                    Начать анализ
+                <button className={'home-main-button'} onClick={handleStartAnalysis}>
+                    <span>Начать Анализ</span>
                 </button>
             </div>
 

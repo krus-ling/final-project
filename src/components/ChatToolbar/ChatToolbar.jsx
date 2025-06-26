@@ -15,10 +15,18 @@ const ChatToolbar = ( {
                           onUpload,
                           isLoading,
                           activeIcons = [],
-                          setActiveIcons = () => {}
+                          setActiveIcons = () => {},
 } ) => {
 
     const [isPlusActive, setIsPlusActive] = useState(false);
+    const [isSent, setIsSent] = useState(false); // локальный sent
+
+    const handleSendClick = () => {
+        if (!isSendActive) return;
+        setIsSent(true);             // включаем класс анимации
+        onSend?.();                  // вызываем внешний callback
+        setTimeout(() => setIsSent(false), 5000); // сбрасываем через 2 сек
+    };
 
     const handleIconClick = (name) => {
         if (name === 'plus') {
@@ -37,6 +45,7 @@ const ChatToolbar = ( {
                 : [...prev, name] // добавляем в активные
         );
     };
+
 
     return (
         <div className={'chat-footer'}>
@@ -85,12 +94,15 @@ const ChatToolbar = ( {
                     <div className="spinner"></div>
                 ) : (
                     <button
-                        className={`chat-send-button ${isSendActive ? 'active' : 'disabled'}`}
+                        className={`chat-send-button ${isSendActive ? 'active' : 'disabled'} ${isSent ? 'sent' : ''}`}
                         disabled={!isSendActive}
-                        onClick={onSend}
+                        onClick={handleSendClick}
                         title={'Отправить'}
                     >
-                        <img src={SendIcon} alt="Отправить" />
+                        <img src={SendIcon} alt="Отправить" className="arrow" />
+                        <svg className="checkmark" viewBox="0 0 24 24">
+                            <path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" strokeWidth="2" />
+                        </svg>
                     </button>
                 )}
             </div>
