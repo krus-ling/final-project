@@ -1,4 +1,5 @@
 import './ChatBox.css';
+import UploadedFileCard from  '../UploadedFileCard/UploadedFileCard.jsx';
 import {useEffect, useRef, useState} from "react";
 import ChatToolbar from '../ChatToolbar/ChatToolbar.jsx';
 
@@ -20,8 +21,7 @@ const ChatBox = ({
     const [uploadedFiles, setUploadedFiles] = useState([]); // пока не используется, поэтому подчеркивается красным
     const [isLoading, setIsLoading] = useState(false);
 
-    const [activeIcons, setActiveIcons] = useState([]);
-
+    // const [activeIcons, setActiveIcons] = useState([]);
 
 
     const toggleActiveIcon = (name) => {
@@ -105,6 +105,15 @@ const ChatBox = ({
         }
     }, [initialFiles]);
 
+    // чтобы удалялся компонент файла после загрузки
+    useEffect(() => {
+        if (isSent) {
+            setUploadedFiles([]);
+            setIsSendActive(false);
+        }
+    }, [isSent]);
+
+
     return (
         <div className={`chat-box ${isDragActive ? 'drag-active' : ''}`}
              onDrop={handleDrop}
@@ -113,10 +122,26 @@ const ChatBox = ({
              onDragLeave={handleDragLeave}
         >
             <div className="chat-input">
+
                 {/* Всегда видимая фраза */}
                 <span className="chat-hint">
                     <span className="chat-hint-title">CodePulse</span> готов к действию.  Добавь свой файл.
                 </span>
+
+                {/* Загруженный файл отображается здесь */}
+                {uploadedFiles.length > 0 && (
+                    <div className={`uploaded-file-wrapper file-card-wrapper show`}>
+                        <UploadedFileCard
+                            file={uploadedFiles[0]}
+                            onRemove={() => {
+                                setUploadedFiles([]);
+                                onFileSelected([]);
+                                setIsSendActive(false);
+                            }}
+                        />
+                    </div>
+                )}
+
 
                 <ChatToolbar
                     activeIcon={activeIcon}
@@ -137,6 +162,7 @@ const ChatBox = ({
                     accept=".py,.js,.ts,.java,.cpp,.go,.zip"
                 />
             </div>
+
         </div>
     );
 };

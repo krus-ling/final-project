@@ -1,0 +1,58 @@
+/* components/UploadedFileCard.css */
+.file-card {
+    display: flex;
+    align-items: center;
+    background-color: #2e2e2e;
+    padding: 7px 9px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+.file-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #a0a0a0;
+}
+
+.file-name {
+    display: block;
+    color: #f1f1f1;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-size {
+    color: #888;
+    font-size: 12px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #444;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.remove-btn:hover {
+    background: #ff4d4d;
+}
+
+.remove-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
