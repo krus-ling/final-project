@@ -1,14 +1,16 @@
 import './Chat.css';
 import ChatBox from "../components/ChatBox/ChatBox.jsx";
 import {useEffect, useState} from "react";
+import { useLocation } from "react-router-dom";
 
 function Chat() {
+
+    const location = useLocation();
 
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [dotCount, setDotCount] = useState(0);
     const [isSent, setIsSent] = useState(false);
     const [files, setFiles] = useState([]);
-
     const [selectedModes, setSelectedModes] = useState([]);
 
     const mapModeToTitle = (mode) => {
@@ -37,7 +39,7 @@ function Chat() {
     };
 
     const handleFileSelected = (files) => {
-        setFiles(files);
+        setFiles(prevFiles => [...prevFiles, ...files]);
         setIsSent(false);          // сбрасываем заглушку
         setIsAnalyzing(false);     // подстраховка
         setDotCount(0);            // сброс точек
@@ -60,6 +62,16 @@ function Chat() {
         return () => clearInterval(interval);
     }, [isAnalyzing]);
 
+    useEffect(() => {
+        if (location.state?.uploadedFiles?.length > 0) {
+            const incomingFiles = location.state.uploadedFiles;
+            setFiles(incomingFiles);
+            setIsSent(false);      // сбросить заглушку
+            setIsAnalyzing(false); // убедиться что не в анализе
+            setDotCount(0);        // сброс точки
+        }
+    }, [location.state]);
+
     return (
         <div className={'page-wrapper'}>
             <div className={`chat-content ${isSent ? 'after-send' : ''}`}>
@@ -75,10 +87,10 @@ function Chat() {
 
                     {isSent && (
                         <div className="result-placeholder fade">
-                            <h1>Анализ завершён!</h1>
+                            <h1>Результат анализа</h1>
                             {selectedModes.length > 0 ? (
                                 <>
-                                    <p className={'chat-hint'}><span className={'chat-hint-title'}>Тип анализа:</span> {selectedModes.map(mapModeToTitle).join(', ')}</p>
+                                    <p className={'chat-hint-type'}><span className={'chat-hint-title'}>Тип анализа:</span> {selectedModes.map(mapModeToTitle).join(', ')}</p>
                                     <p className={'generate-text'}>
                                         Практический опыт показывает, что начало повседневной работы по формированию позиции способствует подготовке и реализации позиций, занимаемых участниками в отношении поставленных задач!<br/>
 
@@ -91,7 +103,7 @@ function Chat() {
                                 </>
 
                             ) : (
-                                <p>Тип анализа не выбран.</p>
+                                <p className={'type-none'}>Тип анализа не выбран.</p>
                             )}
 
                         </div>
@@ -102,7 +114,9 @@ function Chat() {
                     onFileSelected={handleFileSelected}
                     onSend={handleSend}
                     selectedModes={selectedModes}           // массив активных режимов
-                    setSelectedModes={handleModeChange}     // функцию для их обновления
+                    setSelectedModes={handleModeChange}
+                    initialFiles={location.state?.uploadedFiles || []}// функцию для их обновления
+                    isSent={isSent}
                 />
             </div>
         </div>

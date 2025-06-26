@@ -18,10 +18,16 @@
 .chat-hint {
     font-family: "SF UI Text 400", serif;
     font-size: 24px;
-    margin-bottom: 41px;
+    margin-bottom: 31px;
     margin-top: 30px;
     min-height: 28px; /* чтобы не прыгала при смене текста */
     transition: all 0.3s ease;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.chat-hint.type {
+    text-align: center;
 }
 
 .chat-hint-title {

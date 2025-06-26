@@ -1,20 +1,32 @@
 import './ChatBox.css';
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import ChatToolbar from '../ChatToolbar/ChatToolbar.jsx';
 
 const ChatBox = ({
                      onFileSelected,
                      onSend,
                      selectedModes,
-                     setSelectedModes
-                 }) => {
+                     setSelectedModes,
+                     initialFiles = [],
+                     isSent
+}) => {
     const fileInputRef = useRef(null);
     const dragCounter = useRef(0);
 
-    const [isDragActive, setIsDragActive] = useState(false);
-    const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isSendActive, setIsSendActive] = useState(false);
     const [activeIcon, setActiveIcon] = useState(null);
+    const [isDragActive, setIsDragActive] = useState(false);
+
+    const [uploadedFiles, setUploadedFiles] = useState([]); // пока не используется, поэтому подчеркивается красным
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [activeIcons, setActiveIcons] = useState([]);
+
+
+
+    const toggleActiveIcon = (name) => {
+        setActiveIcon((prev) => (prev === name ? null : name));
+    };
 
     const handleUploadClick = () => {
         fileInputRef.current.click();
@@ -27,6 +39,7 @@ const ChatBox = ({
         }
     };
 
+    // DnD handlers
     const handleDrop = (e) => {
         e.preventDefault();
         dragCounter.current = 0;
@@ -59,25 +72,37 @@ const ChatBox = ({
     };
 
     const handleSend = () => {
-        if (onSend) onSend();
+        if (onSend) {
+            onSend();
+        }
+
     };
 
+    // Имитация загрузки
     const simulateUpload = (files) => {
         setIsLoading(true);
-        setUploadedFiles(files);
+        setIsSendActive(false);
+        setUploadedFiles(prevFiles => [...prevFiles, ...files]);
+
         if (onFileSelected) {
-            onFileSelected(files);
+            onFileSelected(files); // передаём наверх
         }
 
         setTimeout(() => {
+            setIsSendActive(true);
             setIsLoading(false);
-        }, 1500);
+        }, 1500); // 1 секунда "загрузки"
     };
 
     useEffect(() => {
-        // сбрасываем файлы при смене режима
-        setUploadedFiles([]);
-    }, [selectedModes]);
+        setIsSendActive(uploadedFiles.length > 0);
+    }, [uploadedFiles]);
+
+    useEffect(() => {
+        if (initialFiles.length > 0) {
+            simulateUpload(initialFiles);
+        }
+    }, [initialFiles]);
 
     return (
         <div className={`chat-box ${isDragActive ? 'drag-active' : ''}`}
@@ -87,14 +112,15 @@ const ChatBox = ({
              onDragLeave={handleDragLeave}
         >
             <div className="chat-input">
+                {/* Всегда видимая фраза */}
                 <span className="chat-hint">
-                    <span className="chat-hint-title">CodePulse</span> готов к действию. Добавь свой файл.
+                    <span className="chat-hint-title">CodePulse</span> готов к действию.  Добавь свой файл.
                 </span>
 
                 <ChatToolbar
                     activeIcon={activeIcon}
-                    onIconClick={setActiveIcon}
-                    isSendActive={uploadedFiles.length > 0}
+                    onIconClick={toggleActiveIcon}
+                    isSendActive={!isSent && isSendActive && uploadedFiles.length > 0}
                     onSend={handleSend}
                     onUpload={handleUploadClick}
                     isLoading={isLoading}

@@ -85,7 +85,7 @@ const ChatToolbar = ( {
                     <div className="spinner"></div>
                 ) : (
                     <button
-                        className={`chat-send-button ${isSendActive ? 'active visible' : 'disabled hidden'}`}
+                        className={`chat-send-button ${isSendActive ? 'active' : 'disabled'}`}
                         disabled={!isSendActive}
                         onClick={onSend}
                         title={'Отправить'}

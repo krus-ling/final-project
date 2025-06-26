@@ -52,12 +52,15 @@
 
 .result-placeholder {
     max-width: 800px;
+    text-align: center;
 }
 
 .generate-text {
     text-align: left;
 }
 
-.type-analysis {
-
+.chat-hint-type {
+    text-align: center;
+    font-family: "SF UI Text 400", serif;
+    font-size: 20px;
 }
