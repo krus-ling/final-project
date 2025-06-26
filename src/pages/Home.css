@@ -5,6 +5,12 @@
     justify-content: flex-start; /* ставим контент вверх */
     max-width: 1440px;
     /*border: 1px solid red;*/
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.content.fade-out {
+    opacity: 0;
 }
 
 .description {
@@ -20,8 +26,8 @@
     color: white;
     font-family: 'Techfont_Italica', serif;
     text-align: left;
-
 }
+
 
 .description p {
     margin-top: 0;
