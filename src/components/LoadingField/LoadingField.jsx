@@ -1,18 +1,33 @@
-import './LoadingField.css';
-import { useRef } from "react";
-import FolderUploadIcon from '../../assets/img/folder-upload-icon.svg';
+import './LoadingField.css'
+import {useRef, useState} from "react";
+import FolderUploadIcon from '../../assets/img/folder-upload-icon.svg'
 
-const LoadingField = ({ onFileSelected, fileName, isLoading }) => {
+const LoadingField = ({ onFileSelected }) => {
+
+    // состояние для drag
     const inputRef = useRef(null);
+
     const dragCounter = useRef(0);
+
+    // состояние для  индикатора загрузки файла
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [isDragActive, setIsDragActive] = useState(false);
+
+    const [fileName, setFileName] = useState(null); // добавляем состояние для кол-ва файлов
 
     const handleDrop = (e) => {
         e.preventDefault();
-        dragCounter.current = 0;
+        dragCounter.current = 0; // сброс счетчика при отпускании файла
+        setIsDragActive(false); // сбрасываем
 
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            onFileSelected([files[0]]);
+            const file = files[0];
+            setFileName(file.name);
+            setIsLoading(true); // спиннер появляется только тут
+            onFileSelected([file]);
+            setTimeout(() => setIsLoading(false), 1500) // ЗАГЛУШКА ДЛЯ ЗАГРУЗКИ
         }
     };
 
@@ -23,29 +38,41 @@ const LoadingField = ({ onFileSelected, fileName, isLoading }) => {
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
-            onFileSelected([files[0]]);
+            const file = files[0];
+            setFileName(file.name);
+            setIsLoading(true);
+            dragCounter.current = 0;  // сброс счетчика при выборе через диалог
+            setIsDragActive(false);
+            onFileSelected([file]);
+            setTimeout(() => setIsLoading(false), 1500) // ЗАГЛУШКА ДЛЯ ЗАГРУЗКИ
         }
     };
 
     const handleDragEnter = (e) => {
         e.preventDefault();
         dragCounter.current++;
+        if (dragCounter.current === 1) {
+            setIsDragActive(true); // подсветка при первом входе в зону
+        }
     };
 
     const handleDragOver = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // обязательно, чтобы позволить drop
     };
 
     const handleDragLeave = (e) => {
         e.preventDefault();
         dragCounter.current--;
+        if (dragCounter.current === 0) {
+            setIsDragActive(false); // убираем подсветку, когда полностью вышли из зоны
+        }
     };
 
     return (
         <div className="dropzone-wrapper">
             <div className={'dropzone-padding'}>
                 <div
-                    className={`dropzone`}
+                    className={`dropzone ${isDragActive ? 'drag-active' : ''}`}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     onDragEnter={handleDragEnter}
@@ -55,6 +82,7 @@ const LoadingField = ({ onFileSelected, fileName, isLoading }) => {
                     <img src={FolderUploadIcon} alt="Upload icon" className="upload-icon" />
                     <p className="drop-text">Перетащите свой файл или папку сюда</p>
 
+                    {/* При загрузке показываем спиннер, иначе — кнопку */}
                     <div className={'upload-control'}>
                         {isLoading ? (
                             <div className={'spinner'}></div>
@@ -63,6 +91,7 @@ const LoadingField = ({ onFileSelected, fileName, isLoading }) => {
                         )}
                     </div>
 
+                    {/* Подпись под кнопкой */}
                     {isLoading ? (
                         <p className="files-count-text">Файл загружается, подождите...</p>
                     ) : (
@@ -84,6 +113,6 @@ const LoadingField = ({ onFileSelected, fileName, isLoading }) => {
             <p className="local-note">Файл анализируется локально в рамках сессии</p>
         </div>
     );
-};
+}
 
 export default LoadingField;
