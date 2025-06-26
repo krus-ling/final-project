@@ -9,6 +9,11 @@
     margin-top: 10vh;
 }
 
+.message.result {
+    margin-bottom: 20vh;
+    transition: margin 2s ease;
+}
+
 .page-wrapper {
     min-height: 100vh;
     display: flex;
@@ -23,7 +28,36 @@
     margin: 0 0 59px 0;
 }
 
+.result-placeholder h1 {
+    font-family: "SF UI Text 600", serif;
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+.fade {
+    opacity: 1;
+    transition: opacity 2s ease;
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .result-placeholder {
-    margin-bottom: 100px;
     max-width: 800px;
+}
+
+.generate-text {
+    text-align: left;
+}
+
+.type-analysis {
+
 }

@@ -9,6 +9,18 @@ function Chat() {
     const [isSent, setIsSent] = useState(false);
     const [files, setFiles] = useState([]);
 
+    const [selectedModes, setSelectedModes] = useState([]);
+
+    const mapModeToTitle = (mode) => {
+        switch (mode) {
+            case 'compare': return 'Умное сравнение';
+            case 'criticism': return 'Критика архитектуры';
+            case 'refactoring': return 'ИИ-рефакторинг';
+            case 'security': return 'Анализ безопасности';
+            default: return mode;
+        }
+    };
+
     const handleSend = () => {
         if (files.length === 0) return;
 
@@ -20,8 +32,23 @@ function Chat() {
         setTimeout(() => {
             setIsAnalyzing(false);
             setIsSent(true);
+            setFiles([]);
         }, 3000);
     };
+
+    const handleFileSelected = (files) => {
+        setFiles(files);
+        setIsSent(false);          // сбрасываем заглушку
+        setIsAnalyzing(false);     // подстраховка
+        setDotCount(0);            // сброс точек
+        // setSelectedModes([]);   // раскомментируй если хочешь сбрасывать выбор режимов
+    };
+
+    const handleModeChange = (modes) => {
+        setSelectedModes(modes);
+        setIsSent(false); // сбрасываем, чтобы заглушка исчезла при изменении режима
+    };
+
 
     useEffect(() => {
         if (!isAnalyzing) return;
@@ -36,26 +63,46 @@ function Chat() {
     return (
         <div className={'page-wrapper'}>
             <div className={`chat-content ${isSent ? 'after-send' : ''}`}>
+
                 <div className={`message ${isSent ? 'result' : ''}`}>
                     {!isAnalyzing && !isSent && (
-                        <h1>Готов к анализу — загрузи свой код!</h1>
+                        <h1 className="fade">Готов к анализу — загрузи свой код!</h1>
                     )}
 
                     {isAnalyzing && (
-                        <h1>Анализ{'.'.repeat(dotCount)}</h1>
+                        <h1 className="fade">Анализ{'.'.repeat(dotCount)}</h1>
                     )}
 
                     {isSent && (
-                        <div className="result-placeholder">
-                            <h2>Анализ завершён!</h2>
-                            <p>Скоро появятся результаты анализа загруженных файлов.</p>
+                        <div className="result-placeholder fade">
+                            <h1>Анализ завершён!</h1>
+                            {selectedModes.length > 0 ? (
+                                <>
+                                    <p className={'chat-hint'}><span className={'chat-hint-title'}>Тип анализа:</span> {selectedModes.map(mapModeToTitle).join(', ')}</p>
+                                    <p className={'generate-text'}>
+                                        Практический опыт показывает, что начало повседневной работы по формированию позиции способствует подготовке и реализации позиций, занимаемых участниками в отношении поставленных задач!<br/>
+
+                                        Повседневная практика показывает, что реализация намеченного плана развития представляет собой интересный эксперимент проверки всесторонне сбалансированных нововведений. Практический опыт показывает, что дальнейшее развитие различных форм деятельности способствует подготовке и реализации позиций, занимаемых участниками в отношении поставленных задач.<br/>
+
+                                        Разнообразный и богатый опыт постоянное информационно-техническое обеспечение нашей деятельности способствует подготовке и реализации позиций, занимаемых участниками в отношении поставленных задач?<br/>
+
+                                        Практический опыт показывает, что постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации дальнейших направлений развитая системы массового...<br/>
+                                    </p>
+                                </>
+
+                            ) : (
+                                <p>Тип анализа не выбран.</p>
+                            )}
+
                         </div>
                     )}
                 </div>
 
                 <ChatBox
-                    onFileSelected={setFiles}
+                    onFileSelected={handleFileSelected}
                     onSend={handleSend}
+                    selectedModes={selectedModes}           // массив активных режимов
+                    setSelectedModes={handleModeChange}     // функцию для их обновления
                 />
             </div>
         </div>

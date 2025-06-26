@@ -9,9 +9,15 @@ import SendIcon from '../../assets/img/send-icon.svg';
 import ChatOptionIcon from "../ChatOptionIcon/ChatOptionIcon.jsx";
 import {useState} from "react";
 
-const ChatToolbar = ( { isSendActive, onSend, onUpload, isLoading } ) => {
+const ChatToolbar = ( {
+                          isSendActive,
+                          onSend,
+                          onUpload,
+                          isLoading,
+                          activeIcons = [],
+                          setActiveIcons = () => {}
+} ) => {
 
-    const [activeIcons, setActiveIcons] = useState([]);
     const [isPlusActive, setIsPlusActive] = useState(false);
 
     const handleIconClick = (name) => {
@@ -20,9 +26,7 @@ const ChatToolbar = ( { isSendActive, onSend, onUpload, isLoading } ) => {
             onUpload(); // вызываем загрузку (окно выбора)
 
             // через 300 мс убираем выделение
-            setTimeout(() => {
-                setIsPlusActive(false);
-            }, 200);
+            setTimeout(() => setIsPlusActive(false), 200);
 
             return; // не активируем иконку "плюс"
         }
